@@ -68,6 +68,158 @@
     margin: 0 0 1.75rem;
   }
 
+  .full-profile {
+    background: var(--chalk);
+    border: 0.5px solid var(--line);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: card-in 0.5s ease forwards;
+    animation-delay: 0.32s;
+  }
+
+  .full-profile-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 1.25rem;
+  }
+
+  .full-profile-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #6b7a5e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .full-profile-name {
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .full-profile-sub {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin: 2px 0 0;
+  }
+
+  .full-profile-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+  }
+
+  .full-profile-rankings {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 1.4rem;
+  }
+
+  .rank-tile {
+    background: rgba(255,255,255,0.6);
+    border-radius: 8px;
+    padding: 0.6rem 0.3rem;
+    text-align: center;
+  }
+
+  .rank-tile.unavailable {
+    opacity: 0.5;
+  }
+
+  .rank-tile-label {
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    margin: 0 0 4px;
+  }
+
+  .rank-tile-value {
+    font-size: 14.5px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .full-profile-matches {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.4rem;
+  }
+
+  .match-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 0.5px solid var(--line);
+    font-size: 12.5px;
+  }
+
+  .match-row:last-child { border-bottom: none; }
+
+  .match-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+
+  .match-tag.win { background: #e3eee0; color: #4a6b3d; }
+  .match-tag.loss { background: #f6e2de; color: #a3361d; }
+
+  .full-profile-h2h {
+    background: rgba(255,255,255,0.6);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+  }
+
+  .h2h-names {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .h2h-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .h2h-bar-track {
+    flex: 1;
+    height: 7px;
+    background: #f6e2de;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .h2h-bar-fill {
+    height: 100%;
+    background: #4a6b3d;
+  }
+
+  .h2h-note {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin: 8px 0 0;
+  }
+
   .eyebrow {
     font-size: 13px;
     letter-spacing: 0.08em;
@@ -500,7 +652,7 @@
 
     <p class="fineprint">When we launch we will provide you with an EMAIL to start your free account</p>
 
-    <p class="demo-label" id="demo-label">Sample tennis profiles, from around the world</p>
+    <p class="demo-label" id="demo-label">Prototypes of Real Tennis Player Search Mockups</p>
 
     <div class="sport-panel">
       <div class="demo-cards panel-pane visible" id="demo-cards-tennis">
@@ -740,17 +892,89 @@
         </div>
       </div>
     </div>
+
+    <div class="full-profile">
+      <div class="full-profile-head">
+        <div class="full-profile-avatar">DM</div>
+        <div>
+          <p class="full-profile-name">Diego Marín</p>
+          <p class="full-profile-sub">Spain &middot; Age 21 &middot; Right-handed</p>
+        </div>
+      </div>
+
+      <p class="full-profile-section-label">Rankings across systems</p>
+      <div class="full-profile-rankings">
+        <div class="rank-tile">
+          <p class="rank-tile-label">ATP</p>
+          <p class="rank-tile-value">#312</p>
+        </div>
+        <div class="rank-tile">
+          <p class="rank-tile-label">ITF WTN</p>
+          <p class="rank-tile-value">15.8</p>
+        </div>
+        <div class="rank-tile">
+          <p class="rank-tile-label">UTR</p>
+          <p class="rank-tile-value">13.1</p>
+        </div>
+        <div class="rank-tile unavailable">
+          <p class="rank-tile-label">WTA</p>
+          <p class="rank-tile-value"><i class="ti ti-x" style="font-size:14px;" aria-hidden="true"></i></p>
+        </div>
+        <div class="rank-tile unavailable">
+          <p class="rank-tile-label">ATP Finals</p>
+          <p class="rank-tile-value" style="font-size:12px;">N/A</p>
+        </div>
+      </div>
+
+      <p class="full-profile-section-label">Recent matches</p>
+      <div class="full-profile-matches">
+        <div class="match-row">
+          <span><span class="match-tag win">W</span>vs. T. Berghoff</span>
+          <span style="color:var(--ink-soft);">Challenger Lisbon, 6&ndash;4 6&ndash;2</span>
+        </div>
+        <div class="match-row">
+          <span><span class="match-tag win">W</span>vs. R. Okafor</span>
+          <span style="color:var(--ink-soft);">ITF M25 Antalya, 7&ndash;6 6&ndash;3</span>
+        </div>
+        <div class="match-row">
+          <span><span class="match-tag loss">L</span>vs. J. Forsythe</span>
+          <span style="color:var(--ink-soft);">ITF M25 Antalya, 4&ndash;6 6&ndash;7</span>
+        </div>
+      </div>
+
+      <p class="full-profile-section-label">Head-to-head matchup</p>
+      <div class="full-profile-h2h">
+        <div class="h2h-names">
+          <span>Diego Marín</span>
+          <span style="font-weight:400; color:var(--ink-soft); font-size:11.5px;">Never played</span>
+          <span>Jannik Sinner</span>
+        </div>
+        <div class="h2h-bar-row">
+          <span style="font-size:11.5px; color:var(--ink-soft); min-width:28px;">9%</span>
+          <div class="h2h-bar-track">
+            <div class="h2h-bar-fill" style="width:9%;"></div>
+          </div>
+          <span style="font-size:11.5px; color:var(--ink-soft); min-width:28px; text-align:right;">91%</span>
+        </div>
+        <p class="h2h-note">Estimated win probability based on ranking gap and surface history. No prior meetings on record.</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
   // ---- CONFIGURE THIS ----
-  const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
-  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+  const SUPABASE_URL = "https://racket-stat.vercel.app/";
+  const SUPABASE_ANON_KEY = "sb_publishable_5YIe_Bm-Qs0Jk0nBoWEW7g_jJZ3DKyN";
   // -------------------------
 
-  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let supabaseClient = null;
+  try {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (err) {
+    console.warn('Supabase not configured yet — update SUPABASE_URL and SUPABASE_ANON_KEY.', err);
+  }
 
   const form = document.getElementById('signup-form');
   const emailInput = document.getElementById('email-input');
@@ -766,6 +990,14 @@
     submitBtn.textContent = 'Saving...';
     statusEl.textContent = '';
     statusEl.className = 'status';
+
+    if (!supabaseClient) {
+      statusEl.textContent = "Signups aren't connected yet — add your Supabase keys.";
+      statusEl.className = 'status error';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Get early access';
+      return;
+    }
 
     try {
       const { error } = await supabaseClient
@@ -837,8 +1069,8 @@
     bgPickleball.classList.toggle('visible', !isTennis);
 
     demoLabel.textContent = isTennis
-      ? 'Sample tennis profiles, from around the world'
-      : 'Sample pickleball profiles, from around the world';
+      ? 'Real Tennis Profile Search Mockups'
+      : 'Real Pickleball Profile Search Mockups';
 
     replayCardAnimations(isTennis ? cardsTennis : cardsPickleball);
   }
