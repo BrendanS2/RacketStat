@@ -393,6 +393,33 @@
   .status.success { color: #2f6e3f; }
   .status.error { color: #a3361d; }
 
+  .waitlist-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+  }
+
+  .waitlist-count .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4a6b3d;
+    animation: pulse-dot 2s ease infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .waitlist-count strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
   .fineprint {
     margin-top: 2rem;
     font-size: 12.5px;
@@ -650,9 +677,14 @@
     </form>
     <div class="status" id="status" role="status" aria-live="polite"></div>
 
+    <div class="waitlist-count" id="waitlist-count" aria-live="polite">
+      <span class="dot"></span>
+      <span><strong id="waitlist-number">—</strong> people on the waitlist</span>
+    </div>
+
     <p class="fineprint">When we launch we will provide you with an EMAIL to start your free account</p>
 
-    <p class="demo-label" id="demo-label">Prototypes of Real Tennis Player Search Mockups</p>
+    <p class="demo-label" id="demo-label">Sample tennis profiles, from around the world</p>
 
     <div class="sport-panel">
       <div class="demo-cards panel-pane visible" id="demo-cards-tennis">
@@ -965,8 +997,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
   // ---- CONFIGURE THIS ----
-  const SUPABASE_URL = "https://qgkrxxdacoetvadvoxjp.supabase.co";
-  const SUPABASE_ANON_KEY = "sb_publishable_5YIe_Bm-Qs0Jk0nBoWEW7g_jJZ3DKyN";
+  const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
   // -------------------------
 
   let supabaseClient = null;
@@ -1015,6 +1047,7 @@
         statusEl.textContent = "You're in. We'll email you at launch.";
         statusEl.className = 'status success';
         emailInput.value = '';
+        fetchWaitlistCount();
       }
     } catch (err) {
       console.error(err);
@@ -1026,7 +1059,24 @@
     }
   });
 
-  // ---- Sport toggle ----
+  // ---- Waitlist counter ----
+  const waitlistNumberEl = document.getElementById('waitlist-number');
+
+  async function fetchWaitlistCount() {
+    if (!supabaseClient) return;
+    try {
+      const { count, error } = await supabaseClient
+        .from('emails')
+        .select('*', { count: 'exact', head: true });
+      if (!error && count !== null) {
+        waitlistNumberEl.textContent = count.toLocaleString();
+      }
+    } catch (e) {
+      console.warn('Could not fetch waitlist count', e);
+    }
+  }
+
+  fetchWaitlistCount();
   const body = document.body;
   const tennisToggle = document.getElementById('tennis-toggle');
   const pickleballToggle = document.getElementById('pickleball-toggle');
@@ -1069,8 +1119,8 @@
     bgPickleball.classList.toggle('visible', !isTennis);
 
     demoLabel.textContent = isTennis
-      ? 'Real Tennis Profile Search Mockups'
-      : 'Real Pickleball Profile Search Mockups';
+      ? 'Sample tennis profiles, from around the world'
+      : 'Sample pickleball profiles, from around the world';
 
     replayCardAnimations(isTennis ? cardsTennis : cardsPickleball);
   }
